@@ -46,4 +46,12 @@ $$and\  \delta amount_{t-1} - bid_{nega} > 0$$
 
 ![img4](img4.png)
 
+为解决交易不活跃的问题，构建几何布朗运动（GBM）模型，将中心价进行无规律的随机游走，同时改进模型，让其价格的随机变动的上下边界在我们可接受的范围内。在进入交易逻辑之前，将当前价的千分之一作为阈值，并计算两次摆盘之间的delta_price。如果delta_price大于该阈值我们认为交易活跃，小于该阈值或者摆盘账户币数净出入为0则认为交易不活跃。
 
+$$\delta price = price_t - price_{t-1}$$
+
+$$threshold =  price_t * 0.001 $$
+
+![img5](img5.png)
+
+构建的GBM baseline model
