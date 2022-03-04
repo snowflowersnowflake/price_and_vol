@@ -82,9 +82,9 @@ $$ f(shiftPrice, model) = vi\ \epsilon (-1,1)$$
 
 $$ returnPrice = vi * k , \ k = currentPrice * 0.001$$
 
-投入实际使用的结果。可见量的一致性
+投入实际使用的结果。可见量的一致性以及打针问题。
 
-the effect of the model will look like this. you will see the vol is almostly the same.
+the effect of the model will look like this. you will see the vol is almostly the same. And the price always get a shot
 
 ![img10](img10.png)
 
