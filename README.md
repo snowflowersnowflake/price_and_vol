@@ -58,3 +58,7 @@ $$threshold =  price_t * 0.001 $$
 
 
 构建 GBM baseline model 并进行本地参数测试
+
+![img7](img7.png)
+
+![img8](img8.png)
