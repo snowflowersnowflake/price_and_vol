@@ -90,13 +90,14 @@ the effect of the model will look like this. you will see the vol is almostly th
 
 ![img11](img11.png)
 
-we do some optimization based on the math model
+we do some optimization based on the math model and put some engineering tricks
 
 * 构建算法模型，计算符合市场规律的成交量
 * 改进原有策略算法，计算更合理的shift，避免波动计算越界
 * 降低策略频率，后续持续关注刷量策略状况，留意是否有异常导致越界
 * 在外部交易发生以及刷量产生10%以上大额变动时，停止一轮刷量，但依然记录lastprice，来规避打针问题
 * 引入比率因子shiftScale和取买一卖一价格所成的边界值askLim和bidLim，每次记录计算出lastPrice在盘口中所处的分位值，然后当盘口变化时，恢复其分位值得到startPrice，再进入模型中增加一个来自模型的扰动
+* 加入多线程机制，用新的线程实时监控是否有外部交易或者异常价差产生。  
 
 原有计算：
 
@@ -118,3 +119,8 @@ $$ returnPrice = vi * k , \ k = currentPrice * 0.001 $$
 $where$
 
 $$ ·shiftScale = | returnPrice - bidLim | \ / \ (askLim - bidLim) $$ 
+
+$$ \Delta price = returnPrice - lastPrice $$
+   
+$$ qtyScale = | \Delta price / lastPrice| * random(0.92, 1.08) * weight $$
+
