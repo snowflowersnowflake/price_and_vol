@@ -16,3 +16,4 @@ So we could make a Parameterization trading strategy like that PID system.
 
 Differentiate the market and make sure the strategy is profitable on each segment.
 
+![img2](img2.png)
