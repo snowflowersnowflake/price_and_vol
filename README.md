@@ -27,15 +27,23 @@ for aum and hit in every seg, use the net buying/selling average price of the ac
 对于做市中必然盈利的部分（这里的盈利标准是实现低买高卖，例如在current_price之上高于卖出均价的ask单，就可以认为都是盈利的部分。利用当前余额沿着指数函数摆盘。对于做市中可能亏损的部分，如上一段净买入均价到当前价的bid单，上一段净卖出均价到当前价的ask单，我们根据上一段区间的盈利计算摆盘后亏损的最大上限，设计算法以第三档为上一段均价，确定前三档的价格，再利用分配机制进行下单数量的分配，确保该段亏损不会超过上一段盈利，这里的形式化表达以买入亏损的状态为例。
 
 $$\min(\delta amount_t) = (\delta amount_{t-1} - bid_{nega} ) + aum_{posi} $$
+
 $$st. \delta amount_{t-1} - bid_{nega} > 0   $$
 
 虽然成交数量取决于市场行为，是不可控的，我们的亏损可能来自于不活跃的交易等等因素。但我们可以通过一些基本的统计方法和工程控制思想得到一个最优的亏损区间段上的下单数量分配方案。我们引入反馈调节部分，传入一个松弛变量$alpha$用来约束$bid_{nega}$，因为该部分下单所用的资金总量和数额都可以确定下来，策略根据$alpha$的值确定预留一定比例的资金和币(需要同时控制币数的定量，因为如果只是减少资金投入是买不回同样数量的币数的)
 
 $$ bid_{nega} = \sum_{i=1}^3(qty_i * price_i) $$
+
 $$\delta amount_{t-1} = bidqty_{t-1} * meanprice_{t-1}$$
+
 $$ ·bid_{nega} = \delta amount_{t-1} * alpha $$
+
 $$ ·bidqty_{t} =  bidqty_{t-1} * (alpha - 0.05) $$
+
 $$st. meanprice_{t-1} < meanprice_{t} $$
+
 $$and\  \delta amount_{t-1} - bid_{nega} > 0$$
 
 ![img4](img4.png)
+
+
