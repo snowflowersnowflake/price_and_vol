@@ -84,10 +84,37 @@ $$ returnPrice = vi * k , \ k = currentPrice * 0.001$$
 
 投入实际使用的结果。可见量的一致性以及打针问题。
 
-the effect of the model will look like this. you will see the vol is almostly the same. And the price always get a shot
+the effect of the model will look like this. you will see the vol is almostly the same. And the price always get a shot in the market.
 
 ![img10](img10.png)
 
 ![img11](img11.png)
 
+we do some optimization based on the math model
 
+* 构建算法模型，计算符合市场规律的成交量
+* 改进原有策略算法，计算更合理的shift，避免波动计算越界
+* 降低策略频率，后续持续关注刷量策略状况，留意是否有异常导致越界
+* 在外部交易发生以及刷量产生10%以上大额变动时，停止一轮刷量，但依然记录lastprice，来规避打针问题
+* 引入比率因子shiftScale和取买一卖一价格所成的边界值askLim和bidLim，每次记录计算出lastPrice在盘口中所处的分位值，然后当盘口变化时，恢复其分位值得到startPrice，再进入模型中增加一个来自模型的扰动
+
+原有计算：
+
+$$ shiftPrice = lastPrice + \beta ,\  \beta =  \Delta mean = mean_{t} - mean_{t-1} $$
+
+$$ f(shiftPrice, model) = vi\ \epsilon (-1,1) $$
+
+$$ returnPrice = vi * k , \ k = currentPrice * 0.001 $$
+
+新的公式：
+
+$$ shiftPrice = (askLim - bidLim) * shiftScale + 
+bidLim - lastPrice $$
+
+$$ f(shiftPrice, model) = vi\ \epsilon (-1,1) $$
+
+$$ returnPrice = vi * k , \ k = currentPrice * 0.001 $$
+
+$where$
+
+$$ ·shiftScale = | returnPrice - bidLim | \ / \ (askLim - bidLim) $$ 
