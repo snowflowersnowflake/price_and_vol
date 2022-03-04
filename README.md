@@ -124,3 +124,9 @@ $$ \Delta price = returnPrice - lastPrice $$
    
 $$ qtyScale = | \Delta price / lastPrice| * random(0.92, 1.08) * weight $$
 
+
+![img12](img12.png)
+
+![img13](img13.png)
+
+![img14](img14.png)
