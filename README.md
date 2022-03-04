@@ -88,3 +88,6 @@ the effect of the model will look like this. you will see the vol is almostly th
 
 ![img10](img10.png)
 
+![img11](img11.png)
+
+
