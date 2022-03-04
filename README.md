@@ -4,4 +4,4 @@ Qian Xuesen contributed many nuclear engineering and rocket engineering applicat
 
 In his work Cybernetics of Engineering, he demonstrated how to use components with low reliability to form a system with high reliability.
 
-[img1](img1.png)
+![img1](img1.png)
