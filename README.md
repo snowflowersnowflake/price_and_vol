@@ -17,3 +17,9 @@ So we could make a Parameterization trading strategy like that PID system.
 Differentiate the market and make sure the strategy is profitable on each segment.
 
 ![img2](img2.png)
+
+对于每一段区间的aum和hit，账户净买入卖出均价，和内盘当前余额作为输入信号加入下一段区间的$u(t)$
+
+for aum and hit in every seg, use the net buying/selling average price of the account, and the current balance of the internal plate as input signal to add $U (t) to the next range.
+
+![img3](img3.png)
