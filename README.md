@@ -70,3 +70,14 @@ test the local baseline
 ![img7](img7.png)
 
 ![img8](img8.png)
+
+根据markov基本原理，我们使每一次传入的价格会迭代生成下一个。考虑到市场价格会因为交易不断改变，每一次调用刷量计算一次买一卖一的均值（mean），并以两次刷量的这段时间间隔上的均值之差作为偏移量（beta）的根据正态分布函数的数学原理让模型返回值位于（-1,1）的区间，让模型回传一个比率，该比率和当前价格共同确定一个新的波动后的值。
+
+follow the markov principle, every price will define the next price. 
+
+$$shiftPrice = lastPrice + \beta ,\  \beta =  \Delta mean = mean_{t} - mean_{t-1}$$
+
+$$ f(shiftPrice, model) = vi\ \epsilon (-1,1)$$
+
+$$ returnPrice = vi * k , \ k = currentPrice * 0.001$$
+
