@@ -54,4 +54,7 @@ $$threshold =  price_t * 0.001 $$
 
 ![img5](img5.png)
 
-构建的GBM baseline model
+![img6](img6.png)
+
+
+构建 GBM baseline model 并进行本地参数测试
