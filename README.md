@@ -28,7 +28,7 @@ for aum and hit in every seg, use the net buying/selling average price of the ac
 
 Follow the buy low, sell high rule, we cal the the price range in which losses are likely to occur
 
-$\min(\delta amount_t) = (\delta amount_{t-1} - bid_{nega} ) + aum_{posi} $
+$ \min(\delta amount_t) = (\delta amount_{t-1} - bid_{nega} ) + aum_{posi} $
 
 $$st. \delta amount_{t-1} - bid_{nega} > 0   $$
 
